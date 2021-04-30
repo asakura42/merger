@@ -63,7 +63,7 @@ $(basename "$0") contains $sum scripts:
 $(if [ ! -z $tmp ] ; then
 	cat $tmp | column -t
 else
-	$(echo "$scripts" | sed 's| .*/| |' | column -t)
+	echo "$scripts" | column -t
 fi)
 
 SYNTAX :
