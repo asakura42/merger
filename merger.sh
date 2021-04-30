@@ -61,9 +61,9 @@ $(basename "$0") contains $sum scripts:
     
     List:
 $(if [ ! -z $tmp ] ; then
-	cat $tmp
+	cat $tmp | column -t
 else
-	$(echo "$scripts" | sed 's| .*/| |')
+	$(echo "$scripts" | sed 's| .*/| |' | column -t)
 fi)
 
 SYNTAX :
