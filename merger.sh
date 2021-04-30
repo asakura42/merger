@@ -57,8 +57,7 @@ cat << EOF >> /tmp/unified.sh
 #--------#
 _USAGE_(){ #{{{
 echo -e "
-$(basename "$0") :
-    There is $sum scripts
+$(basename "$0") contains $sum scripts
     
     List:
 $(echo "$scripts" | sed 's| .*/| |')
