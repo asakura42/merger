@@ -31,7 +31,7 @@ read
                 arg=$(echo -e "$line" | awk -F'\t' '{print $3}')
                 scrnum=$(echo -e "$line"  |  awk -F'\t' '{print $1}')
 
-                elifs="$elifs\nelif [ \"\$1\" = \"$arg\" ]; then\neval \$(echo \"_BLOCK_${scrnum}_ \$2 \$3 \$4\")"
+                elifs="$elifs\nelif [ \"\$1\" = \"$arg\" ]; then\neval \$(echo \"_BLOCK_${scrnum}_ \\\"\$2\\\" \\\"\$3\\\" \\\"\$4\\\"\")"
 
         done <<< "$flags"
 
@@ -57,10 +57,14 @@ cat << EOF >> /tmp/unified.sh
 #--------#
 _USAGE_(){ #{{{
 echo -e "
-$(basename "$0") contains $sum scripts
+$(basename "$0") contains $sum scripts:
     
     List:
-$(echo "$scripts" | sed 's| .*/| |')
+$(if [ ! -z $tmp ] ; then
+	cat $tmp
+else
+	$(echo "$scripts" | sed 's| .*/| |')
+fi)
 
 SYNTAX :
     $(basename "$0") [NUMBER] ...
@@ -78,6 +82,6 @@ elif [[ "\$1" = "-h" ]]; then
     _USAGE_
 $(echo -e "$elifs")
 else
-    eval \$(echo "_BLOCK_\$1_ \$2 \$3 \$4")
+    eval \$(echo "_BLOCK_\$1_ \"\$2\" \"\$3\" \"\$4\"")
 fi
 EOF
