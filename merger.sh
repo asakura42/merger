@@ -30,7 +30,7 @@ cat << EOF >> /tmp/unified.sh
 _USAGE_(){ #{{{
 echo -e "
 $(basename "$0") :
-    There is $sum scripts
+    $sum scripts here.
     
     List:
 $(echo "$scripts" | sed 's| .*/| |')
