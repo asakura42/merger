@@ -46,7 +46,7 @@ while IFS= read -r line ; do
 # $scriptname #
 #-------------#
 _BLOCK_${num}_(){
-	$(cat "$fullscriptpath" | sed '/^#!\//d')
+	cat "$fullscriptpath"
 }
 
 EOF
